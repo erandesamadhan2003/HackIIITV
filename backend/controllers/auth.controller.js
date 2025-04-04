@@ -4,7 +4,7 @@ import { generateToken } from "../utils/generateToken.js";
 
 export const RegisterUser = async (req, res) => {
     try {
-      const { fullName, username, email, password } = req.body;
+        const { username, email, password,confirmPassword} = req.body;
       let user = await User.findOne({ email });
       if (user) return res.status(400).json({ message: "You already have an account" });
   
@@ -12,7 +12,6 @@ export const RegisterUser = async (req, res) => {
       const hash = await bcrypt.hash(password, salt);
   
       user = await User.create({
-        fullName, // Store full name
         username,
         email,
         password: hash,
