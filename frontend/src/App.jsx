@@ -27,6 +27,7 @@ export const App = () => {
   return (
     <>
       <RouterProvider router={appRouter} />
+      
     </>
   )
 }
