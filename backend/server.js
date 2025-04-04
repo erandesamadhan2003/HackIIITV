@@ -2,9 +2,7 @@ import express from 'express'
 import cors from 'cors'
 import dotenv from 'dotenv'
 import { createServer } from 'node:http';
-// import { authRoutes } from './routes/auth.routes.js';
 import connectDB from './config/connectToDatabase.js';
-import cookieParser from 'cookie-parser';
 
 dotenv.config();
 connectDB();
@@ -20,8 +18,6 @@ const corsOption = {
   };
 
 app.use(cors(corsOption));
-app.use(cookieParser());
-// app.use('/auth', authRoutes);
 
 const PORT = process.env.PORT || 5000;
 server.listen(PORT, ()=> {

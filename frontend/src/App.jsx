@@ -4,6 +4,7 @@ import { Home } from './Pages/Home'
 import { Login } from './auth/Login'
 import { Signup } from './auth/Signup'
 import { CodeEditor } from './Pages/CodeEditor'
+import { JoinRoom } from './Pages/JoinRoom'
 
 const appRouter = createBrowserRouter([
   {
@@ -19,14 +20,19 @@ const appRouter = createBrowserRouter([
     element: <Signup />
   },
   {
-    path: 'editor',
+    path: '/editor',
     element: <CodeEditor />
+  },
+  {
+    path: '/joinroom',
+    element: <JoinRoom />
   }
 ])
 export const App = () => {
   return (
     <>
       <RouterProvider router={appRouter} />
+      
     </>
   )
 }
