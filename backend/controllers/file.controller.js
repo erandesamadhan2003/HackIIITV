@@ -115,3 +115,68 @@ export const getspecificFile = async (req, res) => {
         });
     }
 }
+
+
+export const CreateFile = async (req, res) => {
+    try {
+        const { filename, content, owner, roomId } = req.body;
+
+        const room = await Room.findOne({ room_id: roomId });
+
+        if (!room) {
+            return res.status(400).json({
+                success: false,
+                message: "Room Not Found to upload file"
+            })
+        }
+
+        const newFile = new File({
+            filename,
+            content,
+            owner
+        });
+
+        const savedFile = await newFile.save();
+
+        room.files.push(savedFile._id);
+
+        await room.save();
+
+        console.log("Upload Successfully")
+        res.status(200).json({
+            success: true,
+            message: "File added successfully",
+            savedFile
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: "Internal Server Error"
+        });
+    }
+};
+
+export const deleteFileById = async (req, res) => {
+    try {
+      const { fileId } = req.params;
+  
+      // Step 1: Delete the file from File collection
+      const deletedFile = await File.findByIdAndDelete(fileId);
+  
+      if (!deletedFile) {
+        return res.status(404).json({ message: "File not found" });
+      }
+  
+      // Step 2: Remove file reference from all rooms
+      await Room.updateMany(
+        { files: fileId },
+        { $pull: { files: fileId } }
+      );
+  
+      res.status(200).json({ message: "File deleted successfully from File and Room collections" });
+    } catch (error) {
+      console.error("Error deleting file:", error);
+      res.status(500).json({ message: "Internal server error" });
+    }
+  };

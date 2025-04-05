@@ -7,6 +7,11 @@ import { CodeEditor } from './Pages/CodeEditor'
 import { JoinRoom } from './Pages/JoinRoom'
 import { ToastContainer } from 'react-toastify'
 import "react-toastify/dist/ReactToastify.css";
+import MentorForm from './Pages/MentorForm'
+import MenteeForm from './Pages/MenteeForm'
+import CollabForm from './Pages/CollabForm'
+import AllMentors from './Pages/mentor'
+import MentorProfile from './Pages/MentorProfile'
 
 const appRouter = createBrowserRouter([
   {
@@ -22,12 +27,32 @@ const appRouter = createBrowserRouter([
     element: <Signup />
   },
   {
-    path: '/editor',
+    path: '/editor/:roomId',
     element: <CodeEditor />
   },
   {
     path: '/joinroom',
     element: <JoinRoom />
+  },
+  {
+    path: '/mentorform',
+    element: < MentorForm/>
+  },
+  {
+    path: '/menteeform',
+    element: <MenteeForm/>
+  },
+  {
+    path: '/collabform',
+    element: <CollabForm/>
+  },
+  {
+    path: '/mentors',
+    element: <AllMentors/>
+  },
+  {
+    path: '/mentor/:id',
+    element: <MentorProfile/>
   }
 ])
 export const App = () => {
@@ -36,7 +61,7 @@ export const App = () => {
       <RouterProvider router={appRouter} />
       <ToastContainer 
         position="bottom-right" 
-        autoClose={3000} 
+        autoClose={500} 
         hideProgressBar={false} 
         newestOnTop 
         closeOnClick 
@@ -44,7 +69,6 @@ export const App = () => {
         draggable 
         theme="colored" 
       />
-      
     </>
   )
 }
