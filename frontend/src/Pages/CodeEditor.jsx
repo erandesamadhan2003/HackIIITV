@@ -115,7 +115,7 @@ export const CodeEditor = () => {
   };
 
   return (
-    <div className="flex h-screen bg-[#0D021F]">
+    <div className="flex h-screen bg-zinc-900">
       {/* Sidebar */}
       <Sidebar
         roomId={roomId}
@@ -140,9 +140,9 @@ export const CodeEditor = () => {
         </div>
 
         {/* Chat Box */}
-        <div className="w-80 border-l border-[#4A00E0] bg-[#1E1E2F] p-4 flex flex-col">
+        <div className="w-80 border-l border-gray-500 bg-zinc-900 p-4 flex flex-col">
           <h2 className="text-lg text-white font-semibold">💬 ChatBox</h2>
-          <div className="flex-1 overflow-y-auto bg-[#0D021F] rounded-lg mt-2 p-2">
+          <div className="flex-1 overflow-y-auto bg-zinc-800 rounded-sm mt-2 p-2">
             {messages.map((msg, index) => (
               <div key={index} className="text-white text-sm p-1">
                 <span className="text-gray-500 font-semibold">{msg.username}:</span>{" "}
@@ -155,13 +155,13 @@ export const CodeEditor = () => {
           <div className="mt-2 flex">
             <input
               type="text"
-              className="flex-1 p-2 bg-[#222] text-white rounded-lg"
+              className="flex-1 p-2 bg-zinc-900 text-white rounded-sm"
               placeholder="Type a message..."
               value={message}
               onChange={(e) => setMessage(e.target.value)}
             />
             <button
-              className="ml-2 bg-[#4A00E0] text-white p-2 rounded-lg"
+              className="ml-2 bg-blue-400 text-white p-2 rounded-sm"
               onClick={handleSendButton}
               disabled={!user}
             >

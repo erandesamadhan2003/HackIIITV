@@ -27,10 +27,10 @@ const CollabForm = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#0D021F]">
+    <div className="min-h-screen flex items-center justify-center bg-zinc-900">
       <form
         onSubmit={handleSubmit}
-        className="bg-[#1a0735] shadow-xl rounded-xl p-8 w-full max-w-2xl text-[#EAEAEA] border border-[#4A00E0]"
+        className="bg-zinc-900 shadow-xl rounded-xl p-8 w-full max-w-2xl text-[#EAEAEA] border border-[#4A00E0]"
       >
         <h2 className="text-2xl font-bold mb-6 text-center text-[#7E3AF2]">
           Request Project Collaboration
@@ -48,7 +48,7 @@ const CollabForm = () => {
             name={input.name}
             placeholder={input.placeholder}
             onChange={handleChange}
-            className="w-full mb-4 p-3 rounded-lg bg-[#120428] border border-[#4A00E0] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#9B51E0]"
+            className="w-full mb-4 p-3 rounded-sm bg-zinc-800  placeholder-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-400"
           />
         ))}
 
@@ -56,12 +56,12 @@ const CollabForm = () => {
           name="description"
           placeholder="Project Description"
           onChange={handleChange}
-          className="w-full mb-6 p-3 rounded-lg bg-[#120428] border border-[#4A00E0] placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#9B51E0]"
+          className="w-full mb-6 p-3 rounded-sm bg-zinc-800  placeholder-gray-600 focus:outline-none focus:ring-1 focus:ring-blue-400"
         />
 
         <button
           type="submit"
-          className="w-full py-3 rounded-lg bg-[#7E3AF2] hover:bg-[#9B51E0] text-white font-semibold transition duration-300"
+          className="w-full py-3 rounded-sm bg-blue-400 hover:bg-blue-300 text-white font-semibold transition duration-300"
         >
           Submit
         </button>
