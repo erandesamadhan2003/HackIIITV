@@ -21,8 +21,8 @@ const AllMentors = () => {
 
 
   return (
-    <div className="min-h-screen bg-[#0D021F] py-10 px-4">
-      <h1 className="text-4xl font-bold text-center text-[#7E3AF2] mb-10">
+    <div className="min-h-screen bg-zinc-900 py-10 px-4">
+      <h1 className="text-4xl font-bold text-center text-neutral-300 mb-10">
         Meet Our Mentors
       </h1>
 
