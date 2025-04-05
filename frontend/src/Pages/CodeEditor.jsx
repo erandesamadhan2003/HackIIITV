@@ -129,12 +129,12 @@ export const CodeEditor = () => {
 
       {/* Code Editor + Chat Box Section */}
       <div className="flex flex-1">
-        <div className="flex flex-col flex-1 gap-0">
+        <div className="flex flex-col flex-1">
           <div className="flex-1">
             <Code code={code} setCode={handleCodeChange} language={language} setLanguage={setLanguage} />
           </div>
 
-          <div className="h-[47%]">
+          <div className="h-[50%]">
             <OutputConsole code={code} language={language} />
           </div>
         </div>
@@ -161,7 +161,7 @@ export const CodeEditor = () => {
               onChange={(e) => setMessage(e.target.value)}
             />
             <button
-              className="ml-2 bg-blue-400 text-white p-2 rounded-sm"
+              className="ml-2 bg-blue-700 text-white p-2 rounded-sm"
               onClick={handleSendButton}
               disabled={!user}
             >

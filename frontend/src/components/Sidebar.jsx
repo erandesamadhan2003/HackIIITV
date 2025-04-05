@@ -5,6 +5,8 @@ import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogT
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { MdDeleteForever } from "react-icons/md";
+import { FaDownload } from "react-icons/fa";
+import { IoIosCreate } from "react-icons/io";
 
 
 export const Sidebar = ({ roomId, setCode, handleCodeChange, code, language, activeFile, setActiveFile }) => {
@@ -203,44 +205,51 @@ export const Sidebar = ({ roomId, setCode, handleCodeChange, code, language, act
 
 
   return (
-    <div className="w-64 h-full bg-[#0D021F] text-[#EAEAEA] flex flex-col p-4 border-r border-[#4A00E0]">
-      <h2 className="text-2xl font-bold text-[#7E3AF2] mb-4">Collaboration</h2>
-      <h3 className="text-xl font-bold text-gray-300 mb-4"><span className="text-gray-600">Room:</span> {roomName}</h3>
+    <div className="w-64 h-full bg-zinc-900 text-[#EAEAEA] flex flex-col p-4 border-r border-zinc-700 shadow-md">
+      <h2 className="text-2xl font-extrabold text-white mb-4 tracking-wide">Collaboration</h2>
+      <h3 className="text-lg font-medium text-zinc-300 mb-4">
+        <span className="text-zinc-500">Room:</span> {roomName}
+      </h3>
 
-      <div className="flex justify-between">
-        <label className="flex items-center justify-center bg-[#7E3AF2] text-white py-2 px-4 rounded-lg mb-4 hover:bg-[#9B51E0] transition cursor-pointer">
-          <FaUpload className="mr-2" />
+      <div className="flex justify-around gap-2">
+        <label className="flex items-center justify-center bg-blue-700 text-white py-2 px-3 rounded-md mb-4 hover:bg-black transition-all duration-200 cursor-pointer shadow hover:scale-105">
+          <FaUpload />
           <input type="file" accept=".c,.cpp,.js,.py" className="hidden" onChange={handleFileUpload} />
         </label>
 
         {/* Download Button */}
         <button
-          className="bg-[#4A00E0] text-white px-4 py-2 rounded-lg mb-4"
+          className="bg-blue-700 text-white px-3 py-2 rounded-md mb-4 shadow-md hover:bg-black hover:scale-105 transition-all duration-200 ease-in-out"
           onClick={handleDownload}
         >
-          📥
+          <FaDownload />
         </button>
+
+        {/* Create File Dialog */}
         <Dialog>
           <DialogTrigger asChild>
-            <Button className="bg-[#4A00E0] text-white px-4 py-2 rounded-lg mb-4">
-              ➕
+            <Button className="bg-blue-700 text-white px-3 py-2 rounded-md mb-4 shadow-md hover:bg-black hover:scale-105 transition-all duration-200 ease-in-out">
+              <IoIosCreate />
             </Button>
           </DialogTrigger>
 
-          <DialogContent className="sm:max-w-md bg-[#1E1E2F] text-white border border-[#4A00E0]">
+          <DialogContent className="sm:max-w-md bg-[#1E1E2F] text-white border border-[#7E3AF2] shadow-lg rounded-lg">
             <DialogHeader>
               <DialogTitle className="text-[#EAEAEA]">Create New File</DialogTitle>
             </DialogHeader>
 
             <Input
-              className="text-black"
+              className="text-black mt-2 rounded-md focus:outline-none focus:ring-2 focus:ring-[#7E3AF2]"
               placeholder="Enter file name (e.g., main.js)"
               value={newFilename}
               onChange={(e) => setNewFilename(e.target.value)}
             />
 
             <DialogFooter className="mt-4">
-              <Button onClick={() => handleCreateFile(e)} className="bg-[#7E3AF2] hover:bg-[#9B51E0]">
+              <Button
+                onClick={handleCreateFile}
+                className="bg-blue-400 text-white px-4 py-2 rounded-md shadow-md hover:bg-[#9B51E0] hover:scale-105 transition-all duration-200 ease-in-out"
+              >
                 Create
               </Button>
             </DialogFooter>
@@ -249,19 +258,22 @@ export const Sidebar = ({ roomId, setCode, handleCodeChange, code, language, act
       </div>
 
       {/* File List */}
-      <div className="flex-1 overflow-y-auto">
-        {files.map((file, index) => (
-          <div className="flex items-center justify-between">
+      <div className="flex-1 overflow-y-auto mt-2 space-y-1">
+        {files.map((file) => (
+          <div key={file._id} className="flex items-center justify-between">
             <div
-              key={file._id}
-              className="text-sm py-1 px-2 hover:bg-[#1E1E2F] rounded cursor-pointer"
+              className={`text-sm py-2 px-3 rounded-md w-full cursor-pointer transition-colors duration-150
+                ${activeFile === file._id
+                  ? "bg-[#4A00E0] text-white font-semibold"
+                  : "hover:bg-zinc-800 text-zinc-300"}`}
               onClick={() => handleFileClick(file)}
             >
-              <p>📄 {file.filename}</p>
-
+              📄 {file.filename}
             </div>
+
             <MdDeleteForever
-              className="text-red-600 cursor-pointer"
+              size={22}
+              className="text-red-500 hover:text-red-700 cursor-pointer ml-2 transition-transform duration-150 hover:scale-110"
               onClick={() => handleDeleteFile(file._id)}
             />
           </div>
@@ -270,24 +282,25 @@ export const Sidebar = ({ roomId, setCode, handleCodeChange, code, language, act
 
       {/* Room Info */}
       <div
-        className="mt-4 p-3 bg-[#1E1E2F] rounded-lg text-sm cursor-copy"
+        className="mt-4 p-3 bg-zinc-800 rounded-lg text-sm cursor-pointer hover:ring-1 hover:ring-white transition-all"
         onClick={() => navigator.clipboard.writeText(roomId)}
+        onClickCapture={()=> toast.success('Copy to clipboard')}
       >
         <p>🔑 <strong>Room ID:</strong> {roomId}</p>
       </div>
 
       {/* Collaborators */}
       <div className="mt-4">
-        <h3 className="text-lg font-semibold mb-2">Collaborators</h3>
+        <h3 className="text-lg font-semibold text-white mb-2">Collaborators</h3>
         {collaborators.length > 0 ? (
           collaborators.map((user, index) => (
             <div key={index} className="flex items-center space-x-2 mb-2">
-              <div className="w-4 h-4 rounded-full bg-blue-500"></div>
-              <p>{user.name}</p>
+              <div className="w-3 h-3 rounded-full bg-green-500 animate-pulse"></div>
+              <p className="text-sm text-zinc-300">{user.name}</p>
             </div>
           ))
         ) : (
-          <p>No collaborators yet</p>
+          <p className="text-sm text-zinc-500">No collaborators yet</p>
         )}
       </div>
     </div>

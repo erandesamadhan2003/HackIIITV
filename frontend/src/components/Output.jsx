@@ -19,15 +19,17 @@ export const OutputConsole = ({ code, language }) => {
   };
 
   return (
-    <div className="bg-[#0D021F] border border-[#4A00E0] rounded-lg p-4 text-[#EAEAEA] mt-4 w-[calc(58vw)] ml-4">
-      <h2 className="text-lg font-semibold mb-2">Output:</h2>
-      <button
-        className="bg-[#4A00E0] text-white px-4 py-2 rounded-lg"
-        onClick={runCode}
-      >
-        Run Code
-      </button>
-      <div className="h-32 overflow-y-auto bg-[#1E1E2F] p-2 rounded-lg border border-[#7E3AF2] mt-2">
+    <div className="bg-zinc-900 border border-zinc-900 rounded-lg p-4 text-[#EAEAEA] mx-1">
+      <div className="flex gap-6 justify-between">
+        <h2 className="text-lg font-semibold mb-2">Output:</h2>
+        <button
+          className="bg-[#4A00E0] text-white px-4 py-2 mb-3 rounded-lg"
+          onClick={runCode}
+        >
+          Run Code
+        </button>
+      </div>
+      <div className="h-36 overflow-y-auto bg-zinc-800 p-2 rounded-lg border-700 mt-2">
         {output ? <pre>{output}</pre> : <p className="text-gray-400">No output yet...</p>}
       </div>
     </div>

@@ -16,7 +16,7 @@ export const executeCode = (req, res) => {
         try {
             const sandbox = { console: { log: (...args) => output += args.join(" ") + "\n" } };
             vm.createContext(sandbox);
-            vm.runInContext(code, sandbox, { timeout: 5000 }); // 5-second timeout
+            vm.runInContext(code, sandbox, { timeout: 5000 });
             return res.json({ output: output.trim() || "No output" });
         } catch (error) {
             return res.json({ output: `Runtime Error: ${error.message}` });

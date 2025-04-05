@@ -4,12 +4,12 @@ export const Code = ({ code, setCode, language, setLanguage, filename }) => {
 
 
   return (
-    <div className="flex-1 flex flex-col bg-[#0D021F] text-[#EAEAEA] p-4">
+    <div className="flex-1 flex flex-col bg-zinc-900 text-[#EAEAEA] p-4">
       {/* Language Selector */}
       <div className="flex justify-between items-center mb-2">
         <label className="text-lg font-semibold">Language:</label>
         <select
-          className="bg-[#1E1E2F] text-[#EAEAEA] border border-[#4A00E0] rounded-lg px-3 py-1"
+          className="bg-zinc-700 text-[#EAEAEA] border border-zinc-700 rounded-lg px-3 py-1"
           value={language}
           onChange={(e) => setLanguage(e.target.value)}
         >
@@ -25,7 +25,7 @@ export const Code = ({ code, setCode, language, setLanguage, filename }) => {
 
 
       {/* Code Editor */}
-      <div className="flex-1 border border-[#4A00E0] rounded-lg overflow-hidden h-full">
+      <div className="flex-1 border border-zinc-700 rounded-lg overflow-hidden h-full">
         <Editor
           height="400px"
           theme="vs-dark"
