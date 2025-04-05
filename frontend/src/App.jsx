@@ -22,7 +22,7 @@ const appRouter = createBrowserRouter([
     element: <Signup />
   },
   {
-    path: '/editor',
+    path: '/editor/:roomId',
     element: <CodeEditor />
   },
   {
@@ -36,7 +36,7 @@ export const App = () => {
       <RouterProvider router={appRouter} />
       <ToastContainer 
         position="bottom-right" 
-        autoClose={3000} 
+        autoClose={500} 
         hideProgressBar={false} 
         newestOnTop 
         closeOnClick 
@@ -44,7 +44,6 @@ export const App = () => {
         draggable 
         theme="colored" 
       />
-      
     </>
   )
 }

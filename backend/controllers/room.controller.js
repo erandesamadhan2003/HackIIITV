@@ -1,6 +1,8 @@
 import mongoose from "mongoose";
 import Room from "../modules/Room.js";
 import { User } from "../modules/User.js";
+import File from "../modules/File.js";
+
 
 export const createRoom = async (req, res) => {
     try {
@@ -63,30 +65,26 @@ export const getRoomDetails = async (req, res) => {
 
 export const joinRoom = async (req, res) => {
     try {
-        const { roomId } = req.params; // Extract roomId from URL params
-        const { username } = req.body; // Extract username from request body
+        const { roomId } = req.params;
+        const { userId } = req.body;
 
-        // Check if room exists
         const room = await Room.findOne({ room_id: roomId });
         if (!room) {
             return res.status(404).json({ message: "Room not found" });
         }
 
-        // Find user by username
-        const user = await User.findById(username);
+        const user = await User.findById(userId);
 
         if (!user) {
             return res.status(404).json({ message: "User not found" });
         }
 
-        // Ensure user is not already in the room
         if (room.collaborators.includes(user._id)) {
             return res.status(200).json({ message: "Joined room successfully", room });
         }
 
-        // Add user ID to collaborators array
         room.collaborators.push(user._id);
-        await room.save(); // Save updated room document
+        await room.save();
 
         return res.status(200).json({ message: "Joined room successfully", room });
     } catch (error) {
@@ -107,7 +105,7 @@ export const getRooms = async (req, res) => {
             });
         }
 
-        // Find rooms where the user is a collaborator
+
         const rooms = await Room.find({ collaborators: userId })
             .populate("owner", "name email")
             .populate("collaborators", "name email");
@@ -144,3 +142,4 @@ export const updateFile = async (req, res) => {
         res.status(500).json({ success: false, message: "Server error" });
     }
 };
+
