@@ -7,6 +7,10 @@ import { CodeEditor } from './Pages/CodeEditor'
 import { JoinRoom } from './Pages/JoinRoom'
 import { ToastContainer } from 'react-toastify'
 import "react-toastify/dist/ReactToastify.css";
+import MentorForm from './Pages/MentorForm'
+import MenteeForm from './Pages/MenteeForm'
+import CollabForm from './Pages/CollabForm'
+import AllMentors from './Pages/mentor'
 
 const appRouter = createBrowserRouter([
   {
@@ -28,6 +32,22 @@ const appRouter = createBrowserRouter([
   {
     path: '/joinroom',
     element: <JoinRoom />
+  },
+  {
+    path: '/mentorform',
+    element: < MentorForm/>
+  },
+  {
+    path: '/menteeform',
+    element: <MenteeForm/>
+  },
+  {
+    path: '/collabform',
+    element: <CollabForm/>
+  },
+  {
+    path: '/mentors',
+    element: <AllMentors/>
   }
 ])
 export const App = () => {
