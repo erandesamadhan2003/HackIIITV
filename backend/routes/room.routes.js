@@ -1,6 +1,6 @@
 import express from "express";
 import { createRoom, getRoomDetails, getRooms, joinRoom, updateFile } from "../controllers/room.controller.js";
-import { CreateFile, FileUpload, getFiles, getspecificFile } from "../controllers/file.controller.js";
+import { CreateFile, deleteFileById, FileUpload, getFiles, getspecificFile } from "../controllers/file.controller.js";
 
 export const roomRoutes = express.Router();
 
@@ -13,3 +13,4 @@ roomRoutes.get('/file/specificFile/:fileId', getspecificFile);
 roomRoutes.get('/getrooms/:userId', getRooms);
 roomRoutes.put("/file/update/:fileId", updateFile);
 roomRoutes.post("/file/create", CreateFile);
+roomRoutes.delete("/file/delete/:fileId",deleteFileById);
