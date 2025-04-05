@@ -1,5 +1,11 @@
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+//export const Signup = () => {
+   // return (
+      //  <div>
+          //  Signup
+        //</div>
+    //)
+//}
+
 import React, { useState } from 'react';
 
 export const Signup = () => {
@@ -12,52 +18,32 @@ export const Signup = () => {
 
   const [error, setError] = useState('');
   const [message, setMessage] = useState('');
-  const navigate = useNavigate();
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-  
-    if (!formData.username || !formData.email || !formData.password || !formData.confirmPassword) {
-      setError("All fields are required!");
-      return;
-    }
-  
+
     if (formData.password !== formData.confirmPassword) {
       setError("Passwords do not match");
       setMessage('');
       return;
     }
-  
+
+    console.log('Signup successful!', formData);
     setError('');
-    setMessage('Signing up...');
-  
-    try {
-      const response = await fetch("http://localhost:3000/auth/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-        credentials: "include",
-      });
-  
-      const data = await response.json();
-  
-      if (response.ok) {
-        toast.success("Signup successful! Please log in.");
-        navigate("/login");
-      } else {
-        setError(data.message || "Signup failed. Try again.");
-      }
-    } catch (error) {
-      console.error("Signup error:", error);
-      setError("Something went wrong. Please try again.");
-    }
+    setMessage('Signup successful!');
+    setFormData({
+      username: '',
+      email: '',
+      password: '',
+      confirmPassword: ''
+    });
   };
+
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="w-full max-w-sm p-6 bg-white shadow-md rounded-md">
