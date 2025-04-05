@@ -4,6 +4,8 @@ import { toast } from "react-toastify";
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "./ui/dialog";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
+import { MdDeleteForever } from "react-icons/md";
+
 
 export const Sidebar = ({ roomId, setCode, handleCodeChange, code, language, activeFile, setActiveFile }) => {
   const [files, setFiles] = useState([]);
@@ -156,7 +158,7 @@ export const Sidebar = ({ roomId, setCode, handleCodeChange, code, language, act
       if (!response.ok) {
         throw new Error(data.message || "Failed to create file");
       }
-      console.log("Created File",data);
+      console.log("Created File", data);
       toast.success("File created successfully!");
       setFiles((prevFiles) => [...prevFiles, data.savedFile]);
       setNewFilename("");
@@ -167,7 +169,11 @@ export const Sidebar = ({ roomId, setCode, handleCodeChange, code, language, act
       console.error("Error creating file:", error);
     }
   };
+  
 
+  const handleDeleteFile=()=>{
+    
+  }
 
 
   return (
@@ -219,12 +225,16 @@ export const Sidebar = ({ roomId, setCode, handleCodeChange, code, language, act
       {/* File List */}
       <div className="flex-1 overflow-y-auto">
         {files.map((file, index) => (
-          <div
-            key={index}
-            className="flex items-center text-sm py-1 px-2 hover:bg-[#1E1E2F] rounded cursor-pointer"
-            onClick={() => handleFileClick(file)}
-          >
-            📄 {file.filename}
+          <div className="flex items-center justify-between">
+            <div
+              key={index}
+              className="text-sm py-1 px-2 hover:bg-[#1E1E2F] rounded cursor-pointer"
+              onClick={() => handleFileClick(file)}
+            >
+              <p>📄 {file.filename}</p>
+
+            </div>
+              <MdDeleteForever className="text-red-600" onClick={handleDeleteFile} />
           </div>
         ))}
       </div>

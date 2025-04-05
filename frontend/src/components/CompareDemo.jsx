@@ -1,8 +1,10 @@
 import React from "react";
 import { Compare } from "@/components/ui/compare";
 import { Button } from "./ui/button";
+import { useNavigate } from "react-router-dom";
 
 export function CompareDemo() {
+  const navigate = useNavigate();
   return (
     <div className="p-4 border bg-gray-300 border-neutral-200 dark:border-neutral-800 px-4 flex gap-3">
       <Compare
@@ -29,7 +31,7 @@ export function CompareDemo() {
     got you. No setup. No judgment. Just vibes, bugs, and instant <br />
     collab energy. Compile, cry, repeat—with friends.
   </p>
-  <Button className="ml-auto mt-4 text-l px-6 py-4" variant="outline">
+  <Button className="ml-auto mt-4 text-l px-6 py-4" variant="outline" onClick={()=>navigate('/joinroom')}>
     Get started
   </Button>
 </div>

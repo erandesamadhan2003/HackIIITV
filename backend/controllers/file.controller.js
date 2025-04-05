@@ -156,3 +156,27 @@ export const CreateFile = async (req, res) => {
         });
     }
 };
+
+export const deleteFileById = async (req, res) => {
+    try {
+      const { fileId } = req.params;
+  
+      // Step 1: Delete the file from File collection
+      const deletedFile = await File.findByIdAndDelete(fileId);
+  
+      if (!deletedFile) {
+        return res.status(404).json({ message: "File not found" });
+      }
+  
+      // Step 2: Remove file reference from all rooms
+      await Room.updateMany(
+        { files: fileId },
+        { $pull: { files: fileId } }
+      );
+  
+      res.status(200).json({ message: "File deleted successfully from File and Room collections" });
+    } catch (error) {
+      console.error("Error deleting file:", error);
+      res.status(500).json({ message: "Internal server error" });
+    }
+  };
