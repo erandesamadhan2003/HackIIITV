@@ -169,11 +169,37 @@ export const Sidebar = ({ roomId, setCode, handleCodeChange, code, language, act
       console.error("Error creating file:", error);
     }
   };
-  
 
-  const handleDeleteFile=()=>{
-    
-  }
+
+  const handleDeleteFile = async (fileId) => {
+    if (!fileId) {
+      console.error("No file ID provided.");
+      return;
+    }
+
+    try {
+      const response = await fetch(`http://localhost:3000/api/rooms/file/delete/${fileId}`, {
+        method: "DELETE",
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || "Failed to delete file");
+      }
+
+      toast.success("File deleted successfully");
+
+      // Update UI
+      setFiles(prevFiles => prevFiles.filter(file => file._id !== fileId));
+      setCode("");
+      setActiveFile(null);
+
+    } catch (error) {
+      console.error("Error deleting file:", error);
+      toast.error(error.message || "Error deleting file");
+    }
+  };
 
 
   return (
@@ -214,7 +240,7 @@ export const Sidebar = ({ roomId, setCode, handleCodeChange, code, language, act
             />
 
             <DialogFooter className="mt-4">
-              <Button onClick={handleCreateFile} className="bg-[#7E3AF2] hover:bg-[#9B51E0]">
+              <Button onClick={() => handleCreateFile(e)} className="bg-[#7E3AF2] hover:bg-[#9B51E0]">
                 Create
               </Button>
             </DialogFooter>
@@ -227,14 +253,17 @@ export const Sidebar = ({ roomId, setCode, handleCodeChange, code, language, act
         {files.map((file, index) => (
           <div className="flex items-center justify-between">
             <div
-              key={index}
+              key={file._id}
               className="text-sm py-1 px-2 hover:bg-[#1E1E2F] rounded cursor-pointer"
               onClick={() => handleFileClick(file)}
             >
               <p>📄 {file.filename}</p>
 
             </div>
-              <MdDeleteForever className="text-red-600" onClick={handleDeleteFile} />
+            <MdDeleteForever
+              className="text-red-600 cursor-pointer"
+              onClick={() => handleDeleteFile(file._id)}
+            />
           </div>
         ))}
       </div>
