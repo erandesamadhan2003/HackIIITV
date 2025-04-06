@@ -9,7 +9,7 @@
 
 <h3>👨‍💻 Team Members</h3>
 <ul>
-  <li>Srishti Chewle</li>
+  <li>Srishti Chewale</li>
   <li>Samadhan Erande</li>
   <li>Sakshi</li>
   <li>Suhani Kabia</li>
