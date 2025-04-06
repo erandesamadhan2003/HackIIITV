@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import Editor from "@monaco-editor/react";
 
 const GEMINI_API_KEY = "AIzaSyByQFAqIeyR3sNyy2Kl4Pwjqd3D-cFYhjE"; // Make sure not to expose this in production!
@@ -64,7 +63,7 @@ export const Code = ({ code, setCode, language, setLanguage, filename }) => {
           onClick={handleGeminiSuggestion}
           className="bg-[#7E3AF2] px-4 py-1 rounded-lg hover:bg-purple-600 transition"
         >
-          ✨ Suggest with Gemini
+          ✨ Suggestion
         </button>
       </div>
 

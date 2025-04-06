@@ -206,7 +206,7 @@ export const Sidebar = ({ roomId, setCode, handleCodeChange, code, language, act
 
   return (
     <div className="w-64 h-full bg-zinc-900 text-[#EAEAEA] flex flex-col p-4 border-r border-zinc-700 shadow-md">
-      <h2 className="text-2xl font-extrabold text-white mb-4 tracking-wide">Collaboration</h2>
+      <h2 className="text-2xl font-extrabold text-white mb-4 tracking-wide">CoCode</h2>
       <h3 className="text-lg font-medium text-zinc-300 mb-4">
         <span className="text-zinc-500">Room:</span> {roomName}
       </h3>
