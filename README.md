@@ -90,6 +90,7 @@ cd HackIIITV
 <p>Create a <code>.env</code> file inside the <code>backend/</code> directory and add:</p>
 
 <pre><code>
+MONGO_URI=Your_Mongo_Url
 PORT=3000
 JWT_KEY=your_jwt_secret
 GEMINI_API_KEY=your_gemini_api_key
