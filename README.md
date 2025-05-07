@@ -89,7 +89,7 @@ cd HackIIITV
 <h4>⚙️ Set Up Environment Variables</h4>
 <p>Create a <code>.env</code> file inside the <code>backend/</code> directory and add:</p>
 
-<pre><code>MONGO_URI=mongodb+srv://erandesamadhan2003:2LSWZKuiMpmfO14b@cluster0.lp0hxdi.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0
+<pre><code>
 PORT=3000
 JWT_KEY=your_jwt_secret
 GEMINI_API_KEY=your_gemini_api_key
