@@ -1,6 +1,5 @@
 import Editor from "@monaco-editor/react";
 
-const GEMINI_API_KEY = "AIzaSyByQFAqIeyR3sNyy2Kl4Pwjqd3D-cFYhjE"; // Make sure not to expose this in production!
 
 export const Code = ({ code, setCode, language, setLanguage, filename }) => {
   const handleGeminiSuggestion = async () => {
